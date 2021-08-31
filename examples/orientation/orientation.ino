@@ -3,8 +3,8 @@
 
 /*!
  * @ingroup bma400Examples
- * @defgroup bma400ExamplesAccelerometer Accelerometer read
- * @brief To read accelerometer xyz data for defined range and ODR
+ * @defgroup bma400ExamplesOrientation Orientation
+ * @brief To showcase orientation feature
  * \include orientation.ino
  */
 
