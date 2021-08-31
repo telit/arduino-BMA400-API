@@ -54,8 +54,6 @@ void setup() {
   rslt = bma400_interface_init(&bma, BMA400_I2C_INTF);
   bma400_check_rslt("bma400_interface_init", rslt);
 
-  Serial.println("soft_reset");
-
   rslt = bma400_soft_reset(&bma);
   bma400_check_rslt("bma400_soft_reset", rslt);
 
