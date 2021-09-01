@@ -3,8 +3,8 @@
 
 /*!
  * @ingroup bma400Examples
- * @defgroup bma400ExamplesAccelerometer Accelerometer read
- * @brief To read accelerometer xyz data for defined range and ODR
+ * @defgroup bma400ExamplesActChange Activity change
+ * @brief To showcase activity change feature
  * \include activity_change.ino
  */
 
@@ -31,7 +31,7 @@ void setup() {
 
   struct test_axes_wise_counter act_ch_cnt = { 0 };
   struct bma400_sensor_data accel;
-  struct bma400_sensor_conf accel_setting[2];;
+  struct bma400_sensor_conf accel_setting[2];
   struct bma400_int_enable int_en;
   
   memset(accel_setting, 0, sizeof(struct bma400_sensor_conf));

@@ -2,7 +2,7 @@
  #ifndef __ARDUINO_BMA400_H__
 #define __ARDUINO_BMA400_H__
 
-#include "bma400_common.h"
+#include "arduino_common.h"
 
 #endif /*__ARDUINO_BMA400_H__*/
 
