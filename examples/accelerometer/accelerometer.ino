@@ -49,7 +49,6 @@ void setup() {
 
   /* Interface reference is given as a parameter
    *         For I2C : BMA400_I2C_INTF
-   *         For SPI : BMA400_SPI_INTF
    */
   rslt = bma400_interface_init(&bma, BMA400_I2C_INTF);
   bma400_check_rslt("bma400_interface_init", rslt);
