@@ -124,7 +124,6 @@ int8_t bma400_interface_init(struct bma400_dev *bma400, uint8_t intf)
         /* Bus configuration : I2C */
         if (intf == BMA400_I2C_INTF)
         {
-            Serial.print("I2C Interface \n");
             Wire.begin();
             s_dev_addr = BMA400_I2C_ADDRESS_SDO_LOW;
             bma400->read = bma400_i2c_read;
@@ -134,7 +133,6 @@ int8_t bma400_interface_init(struct bma400_dev *bma400, uint8_t intf)
         /* Bus configuration : SPI */
         else if (intf == BMA400_SPI_INTF)
         {
-            Serial.print("SPI Interface \n");
             rslt = BMA400_E_NULL_PTR;
         }
 
