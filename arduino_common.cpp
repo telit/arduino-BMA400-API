@@ -15,6 +15,9 @@ extern "C" {
 }
 #endif
 
+/*Set to 1 to print debug i2c data (read and write communication)*/
+#define I2C_DEBUG 0
+
 /*! Read write length varies based on user requirement */
 #define READ_WRITE_LENGTH  UINT8_C(46)
 
@@ -35,6 +38,13 @@ BMA400_INTF_RET_TYPE bma400_i2c_read(uint8_t reg_addr, uint8_t *reg_data, uint32
     while (Wire.available()) {
         for (uint16_t i = 0; i < len; i ++) {
             reg_data[i] = Wire.read();
+#if I2C_DEBUG
+            Serial.print("<= 0x");
+            Serial.print(reg_addr + i, HEX);
+            Serial.print("\t0x");
+            Serial.print(reg_data[i], HEX);
+            Serial.print("\n");
+#endif
         }
     }
     return BMA400_INTF_RET_SUCCESS;
@@ -50,6 +60,13 @@ BMA400_INTF_RET_TYPE bma400_i2c_write(uint8_t reg_addr, const uint8_t *reg_data,
     Wire.write(reg_addr);
     for (uint16_t i = 0; i < len; i++ ) {
       Wire.write(reg_data[i]);
+#if I2C_DEBUG
+      Serial.print("=> 0x");
+      Serial.print(reg_addr + i, HEX);
+      Serial.print("\t0x");
+      Serial.print(reg_data[i], HEX);
+      Serial.print("\n");
+#endif
     }
     Wire.endTransmission();
     return BMA400_INTF_RET_SUCCESS;
@@ -90,28 +107,32 @@ void bma400_check_rslt(const char api_name[], int8_t rslt)
         case BMA400_E_NULL_PTR:
             Serial.print("Error [");
             Serial.print(rslt);
-            Serial.print("] : Null pointer\r\n");
+            Serial.print("] : Null pointer for ");
             break;
         case BMA400_E_COM_FAIL:
             Serial.print("Error [");
             Serial.print(rslt);
-            Serial.print("] : Communication failure\r\n");
+            Serial.print("] : Communication failure for ");
             break;
         case BMA400_E_INVALID_CONFIG:
             Serial.print("Error [");
             Serial.print(rslt);
-            Serial.print("] : Invalid configuration\r\n");
+            Serial.print("] : Invalid configuration for ");
             break;
         case BMA400_E_DEV_NOT_FOUND:
             Serial.print("Error [");
             Serial.print(rslt);
-            Serial.print("] : Device not found\r\n");
+            Serial.print("] : Device not found for ");
             break;
         default:
             Serial.print("Error [");
             Serial.print(rslt);
-            Serial.print("] : Unknown error code\r\n");
+            Serial.print("] : Unknown error code for ");
             break;
+    }
+    if(rslt != BMA400_OK)
+    {
+      Serial.println(api_name);
     }
 }
 
